@@ -1,16 +1,28 @@
 <template>
   <div class="container">
-    <div class="row">
-      <!-- <div class="col-3" v-for="(countries, idx) in countriesName" :key="idx">
-        <div class="card" style="width: 18rem">
-          <img :src="countries.flag" class="card-img-top" alt="" />
-          <div class="card-body">
-            <h5 class="card-title">{{ countries.name }}</h5>
-            <p class="card-text">IS0: {{ countries.iso2 }}</p>
+    <div class="card mb-3" style="width: fit-content">
+      <div class="row g-0">
+        <div class="card-body">
+          <h2 class="card-title text-capitalize">{{ pokemon.name }}</h2>
+          <h6 class="card-text">Abilities</h6>
+          <ul>
+            <li
+              v-for="(item, idx) in pokemon.abilities"
+              :key="idx"
+              class="mb-0"
+            >
+              {{ item.ability.name }}
+            </li>
+          </ul>
+          <div class="d-flex">
+            <img
+              v-for="(item, idx) in pokemon.sprites"
+              :src="item"
+              :key="idx"
+            />
           </div>
         </div>
-      </div> -->
-      <p>Detail Page</p>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +30,47 @@
 <script>
 export default {
   name: "DetailPage",
+  data() {
+    return {
+      pokemon: {},
+    };
+  },
+
+  methods: {
+    fetchData() {
+      fetch(`https://pokeapi.co/api/v2/pokemon/${this.$route.params.id} `, {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          this.pokemon = data;
+        });
+    },
+  },
+
+  mounted() {
+    // console.log("route", this.$route);
+    this.fetchData();
+  },
+
+  // methods: {
+  //   fetchData() {
+  //     fetch(`https://pokeapi.co/api/v2/pokemon/${route.params.id} `, {
+  //       method: "GET",
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log(data.results);
+  //         // this.pokemon = data.results;
+  //       });
+  //   },
+  // },
+
+  // mounted() {
+  //   console.log("route", route);
+  //   // this.fetchData();
+  // },
 };
 </script>
 

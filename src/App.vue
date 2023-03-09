@@ -2,9 +2,9 @@
   <div class="min-vh-100">
     <nav class="navbar bg-primary">
       <div class="container">
-        <a class="navbar-brand" style="color: white" href="#">
+        <RouterLink class="navbar-brand" style="color: white" to="/">
           <strong>Navbar</strong>
-        </a>
+        </RouterLink>
       </div>
     </nav>
     <div class="py-5">
